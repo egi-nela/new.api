@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const path = window.location.pathname;
+    const path = window.location.pathname;//exmp /home/egi/Desktop/new.api/categories.html
 
     if (path.includes('categories.html')) {
         fetchCategories();
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error('Failed to fetch categories');
             }
             const categories = await response.json();
-            console.log("Categories",categories) 
+            console.log("Categories",categories) // ['electronics', 'jewelery', "men's clothing", "women's clothing"]
             displayCategories(categories);
         } catch (error) {
             console.error('Error fetching categories:', error);
@@ -26,10 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const categoryList = document.getElementById('categoryList');
         //categoryList.innerHTML = ''; 
 
-        categories.forEach(category => { 
+        categories.forEach(category => { //category=> cdo kategori e mare nga lista e kategorive te mare nga API ...per cdo categori nga categories 
             
-            const listItem = document.createElement('li'); 
-            listItem.textContent = category; 
+            const listItem = document.createElement('li'); //ke krijuar nje element li 
+            listItem.textContent = category; //per  secilen nga lista e kategorive 
             listItem.addEventListener('click', () => fetchProductsByCategory(category));
             categoryList.appendChild(listItem);
         });
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(`Failed to fetch products for ${category}`);
             }
             const products = await response.json();
-            console.log("Products" , products);
+            console.log("Products" , products); //produktet ne secilen  kategori
             displayProducts(products);
         } catch (error) {
             console.error(`Error fetching products in category "${category}":`, error);
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error('Failed to fetch all products');
             }
             const products = await response.json();
-            console.log("AllProducts" , products);
+            console.log("AllProducts" , products);// te gjitha produktet
             displayProducts(products);
         } catch (error) {
             console.error('Error fetching all products:', error);
@@ -72,14 +72,14 @@ document.addEventListener('DOMContentLoaded', () => {
         productList.innerHTML = ''; // Clear previous content
 
         products.forEach(product => {
-            const listItem = document.createElement('li'); 
-            const productContainer = document.createElement('div');
-            productContainer.classList.add('product-container');
+            const listItem = document.createElement('li'); //krijojm li
+            const productContainer = document.createElement('div');//brenda li krijojm div
+            productContainer.classList.add('product-container');//i shtojm kl
 
             const image = document.createElement('img');
             image.src = product.image;
             image.alt = product.title;
-            productContainer.appendChild(image); 
+            productContainer.appendChild(image); //div i shtojm imazhin
 
             const title = document.createElement('h3');
             title.textContent = product.title;
